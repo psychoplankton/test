@@ -4,7 +4,6 @@ def do_POST(s):
         var_len = int(s.headers.get('Content-Length'))
         content = s.rfile.read(var_len);
         payload = json.loads(content);
-        print("HAha")
 
         if payload.get('train'):
             nn.train(payload['trainArray'])
