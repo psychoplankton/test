@@ -18,6 +18,16 @@ def do_POST(s):
                 response_code = 500
         else:
             response_code = 400
+        
+        if payload.get('train'):
+            nn.train(payload['trainArray'])
+            nn.save()
+        elif payload.get('predict'):
+            try:
+                response = {
+                    "type":"test", 
+                    "result":nn.predict(str(payload['image']))
+                }
 
         s.send_response(response_code)
         s.send_header("Content-type", "application/json")
